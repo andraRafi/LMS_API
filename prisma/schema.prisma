@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(STUDENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  courses     Course[]
+  enrollments Enrollment[]
+  submissions Submission[]
+}
+
+model Course {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String
+  instructorId Int
+  instructor   User     @relation(fields: [instructorId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  enrollments Enrollment[]
+  materials   Material[]
+  assignments Assignment[]
+}
+
+model Enrollment {
+  id         Int      @id @default(autoincrement())
+  studentId  Int
+  student    User     @relation(fields: [studentId], references: [id])
+  courseId   Int
+  Course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  enrolledAt DateTime @default(now())
+
+  @@unique([studentId, courseId])
+}
+
+model Material {
+  id        Int      @id @default(autoincrement())
+  courseId  Int
+  Course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title     String
+  url       String
+  createdAt DateTime @default(now())
+}
+
+model Assignment {
+  id        Int      @id @default(autoincrement())
+  courseId  Int
+  Course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  deadline  DateTime
+  createdAt DateTime @default(now())
+
+  submissions Submission[]
+}
+
+model Submission {
+  id           Int        @id @default(autoincrement())
+  assignmentId Int
+  Assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  studentId    Int
+  student      User       @relation(fields: [studentId], references: [id])
+  url          String
+  submittedAt  DateTime   @default(now())
+  grade        Int?
+  feedback     String?
+
+  @@unique([assignmentId, studentId])
+}

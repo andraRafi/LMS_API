@@ -1,0 +1,19 @@
+meta {
+  name: delete-course
+  type: http
+  seq: 4
+}
+
+delete {
+  url: http://localhost:3000/api/courses/6
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGUiOiJJTlNUUlVDVE9SIiwiaWF0IjoxNzU5Njc3MTMzLCJleHAiOjE3NTk2ODA3MzN9.zydwnprKEHc0kk2xnAyFniv3RlvNJ8bJqYP7w3cv1-o
+}
+
+settings {
+  encodeUrl: true
+}

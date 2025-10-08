@@ -1,0 +1,28 @@
+meta {
+  name: show-materials-course
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/api/courses/6/materials/
+  body: multipartForm
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJTVFVERU5UIiwiaWF0IjoxNzU5NjQ0MzM1LCJleHAiOjE3NTk2NDc5MzV9.mlKBorPv0uQ7tHJyjJKgls2IPNob68BOy66aQ8RP_EU
+}
+
+body:multipart-form {
+  title: gambarnya
+  materialFile: @file(/home/andrarafi/Downloads/hero.png)
+}
+
+body:file {
+  file: @file(/home/andrarafi/Pictures/Screenshots/Screenshot from 2025-09-29 17-29-17.png) @contentType(image/png)
+}
+
+settings {
+  encodeUrl: true
+}

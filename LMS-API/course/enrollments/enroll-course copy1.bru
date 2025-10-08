@@ -1,0 +1,19 @@
+meta {
+  name: enroll-course copy1
+  type: http
+  seq: 3
+}
+
+delete {
+  url: http://localhost:3000/api/courses/6/enrollments/
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGUiOiJJTlNUUlVDVE9SIiwiaWF0IjoxNzU5Njc3MzQ0LCJleHAiOjE3NTk2ODA5NDR9.p3n2AflScVe_q1Fi5Xi3SsYg_MvAHnooTpQCfAvFpuk
+}
+
+settings {
+  encodeUrl: true
+}

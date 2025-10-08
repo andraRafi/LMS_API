@@ -1,0 +1,19 @@
+meta {
+  name: get course id
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/api/courses/
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInJvbGUiOiJTVFVERU5UIiwiaWF0IjoxNzU5NjQ0MzM1LCJleHAiOjE3NTk2NDc5MzV9.mlKBorPv0uQ7tHJyjJKgls2IPNob68BOy66aQ8RP_EU
+}
+
+settings {
+  encodeUrl: true
+}
