@@ -7,6 +7,7 @@ import swaggerSpec from "./config/swagger.js";
 import { prismaErrorHandler } from "./middlewares/prismaErrorHandler.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import courseRoute from "./routes/courseRoute.js";
+import assignmentRouter from "./routes/assignmentRoute.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -17,6 +18,7 @@ app.use(cookieParser());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/auth", authRoute);
 app.use("/api/courses", courseRoute);
+app.use("/api/assignments", assignmentRouter);
 
 app.use(prismaErrorHandler);
 app.use(errorHandler);

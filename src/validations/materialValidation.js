@@ -9,9 +9,7 @@ export const courseIdParamSchema = Joi.object({
 });
 
 export const materialIdParamSchema = Joi.object({
-  // TAMBAHKAN VALIDASI UNTUK courseId DI SINI
   courseId: Joi.number().integer().positive().required(),
 
-  // Validasi untuk materialId sudah benar
   materialId: Joi.number().integer().positive().required(),
 });

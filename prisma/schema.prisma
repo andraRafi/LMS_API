@@ -68,11 +68,13 @@ model Material {
 }
 
 model Assignment {
-  id        Int      @id @default(autoincrement())
-  courseId  Int
-  Course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  deadline  DateTime
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  courseId    Int
+  title       String
+  description String
+  Course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  deadline    DateTime
+  createdAt   DateTime @default(now())
 
   submissions Submission[]
 }

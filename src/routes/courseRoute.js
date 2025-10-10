@@ -16,10 +16,12 @@ import {
 import { authorize } from "../middlewares/roleHandler.js";
 import materialRouter from "./materialRoute.js";
 import enrollmentRouter from "./enrollmentRoute.js";
+import assignmentRouter from "./assignmentRoute.js";
 
 const router = express.Router();
 router.use("/:courseId/materials", materialRouter);
 router.use("/:courseId/enrollments", enrollmentRouter);
+router.use("/:courseId/assignments", assignmentRouter);
 
 router.post(
   "/",
