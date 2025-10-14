@@ -81,7 +81,7 @@ export const deleteMaterial = async (req, res, next) => {
     const material = await prisma.material.findUnique({
       where: { id: parseInt(materialId) },
       include: {
-        Course: true,
+        course: true,
       },
     });
 
@@ -89,7 +89,7 @@ export const deleteMaterial = async (req, res, next) => {
       return next(new AppError(`Material with id ${id} not found`, 404));
     }
 
-    if (material.Course.instructorId !== userId) {
+    if (material.course.instructorId !== userId) {
       return next(
         new AppError("You do not have permission to delete this material", 403)
       );

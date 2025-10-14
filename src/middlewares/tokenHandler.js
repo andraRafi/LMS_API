@@ -1,4 +1,3 @@
-import e from "express";
 import jwt from "jsonwebtoken";
 
 export const validateToken = async (req, res, next) => {

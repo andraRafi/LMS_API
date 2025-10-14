@@ -52,7 +52,7 @@ model Enrollment {
   studentId  Int
   student    User     @relation(fields: [studentId], references: [id])
   courseId   Int
-  Course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   enrolledAt DateTime @default(now())
 
   @@unique([studentId, courseId])
@@ -61,7 +61,7 @@ model Enrollment {
 model Material {
   id        Int      @id @default(autoincrement())
   courseId  Int
-  Course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   title     String
   url       String
   createdAt DateTime @default(now())
@@ -72,7 +72,7 @@ model Assignment {
   courseId    Int
   title       String
   description String
-  Course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   deadline    DateTime
   createdAt   DateTime @default(now())
 
@@ -82,10 +82,11 @@ model Assignment {
 model Submission {
   id           Int        @id @default(autoincrement())
   assignmentId Int
-  Assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  assignment   Assignment @relation(fields: [assignmentId], references: [id])
   studentId    Int
   student      User       @relation(fields: [studentId], references: [id])
   url          String
+  answer       String
   submittedAt  DateTime   @default(now())
   grade        Int?
   feedback     String?

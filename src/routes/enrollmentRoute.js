@@ -8,17 +8,30 @@ import {
   unEnrollInCourse,
   listEnrollment,
 } from "../controllers/enrollmentController.js";
+import { courseIdParamSchema } from "../validations/enrollmentRoute.js";
 
 const router = express.Router({ mergeParams: true });
 
-router.post("/", validateToken, authorize(["STUDENT"]), enrollInCourse);
+router.post(
+  "/",
+  validateToken,
+  authorize(["STUDENT"]),
+  validate(courseIdParamSchema, "params"),
+  enrollInCourse
+);
 router.get(
   "/",
   validateToken,
   authorize(["STUDENT", "INSTRUCTOR"]),
-
+  validate(courseIdParamSchema, "params"),
   listEnrollment
 );
-router.delete("/", validateToken, authorize(["STUDENT"]), unEnrollInCourse);
+router.delete(
+  "/",
+  validateToken,
+  authorize(["STUDENT"]),
+  validate(courseIdParamSchema, "params"),
+  unEnrollInCourse
+);
 
 export default router;
